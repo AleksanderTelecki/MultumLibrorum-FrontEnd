@@ -6,7 +6,10 @@ function Header(props) {
         <header>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/">Multum Librorum</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <i className="fa-solid fa-book-open"></i>
+                        Multum Librorum
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
