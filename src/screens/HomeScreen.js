@@ -13,9 +13,10 @@ function HomeScreen(props) {
     const [openLanguage, setOpenLanguage] = useState(false);
 
     return (
-        <div>
-            <Container>
-            <Navbar bg="light" expand="lg">
+        <div className="componentWraper" >
+            <div className={'pt-2'}></div>
+            <Container >
+            <Navbar  bg="light" expand="lg">
                 <Container fluid>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
@@ -54,9 +55,9 @@ function HomeScreen(props) {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-                <Row>
+                <Row xs={1} sm={2} md={3} lg={4} xl={5}>
                     {products.map(product => (
-                        <Col key={product._id} sm={12} md={6} lg={4} xl={3} >
+                        <Col key={product._id} >
                             <Product product={product}/>
                         </Col>
                     ))}

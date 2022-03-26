@@ -1,9 +1,11 @@
 import React from 'react';
+import {Col, Container, Row} from "react-bootstrap";
 
 function Rating({value,text,color}) {
     return (
-        <div className="rating">
-            <span>
+        <div >
+            <Row>
+                <Col>
                 <i style={{color}} className={
                     value >= 1
                         ? 'fa-solid fa-star'
@@ -11,11 +13,7 @@ function Rating({value,text,color}) {
                             ? 'fa-solid fa-star-half-stroke'
                             : 'fa-regular fa-star'
                 }>
-
                 </i>
-            </span>
-
-            <span>
                 <i style={{color}} className={
                     value >= 2
                         ? 'fa-solid fa-star'
@@ -25,9 +23,6 @@ function Rating({value,text,color}) {
                 }>
 
                 </i>
-            </span>
-
-            <span>
                 <i style={{color}} className={
                     value >= 3
                         ? 'fa-solid fa-star'
@@ -37,9 +32,6 @@ function Rating({value,text,color}) {
                 }>
 
                 </i>
-            </span>
-
-            <span>
                 <i style={{color}} className={
                     value >= 4
                         ? 'fa-solid fa-star'
@@ -49,9 +41,6 @@ function Rating({value,text,color}) {
                 }>
 
                 </i>
-            </span>
-
-            <span>
                 <i style={{color}} className={
                     value >= 5
                         ? 'fa-solid fa-star'
@@ -61,11 +50,10 @@ function Rating({value,text,color}) {
                 }>
 
                 </i>
-            </span>
-
-            <span>
                 {text && text}
-            </span>
+                </Col>
+
+            </Row>
         </div>
     );
 }

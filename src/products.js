@@ -95,6 +95,42 @@ const products = [
     'rating': 4.7,
     'numReviews': 78,
   },
+    {
+        '_id': '7',
+        'name': 'Berserk Deluxe Volume 3',
+        'image': '/images/Berserk Deluxe Volume 3.jpg',
+        'description':
+            'The hundred-year war between the kingdoms of Midland and Tudor nears an end as the legendary Band of the Hawk mercenaries, led by the charismatic Griffith and his fearless berserker champion Guts, turn the tide in Midland s favor. But impending victory ignites a secret war within Midland, as those seeking courtly favor see the ambitious Griffith as an obstacle to power. And nothing is more powerful than an enemy unseen! Collects Berserk volumes 7-9.\n' +
+            '\n' +
+            'Berserk Deluxe Volume 3 Hardback edition by Kentaro Miura',
+        'author': 'Kentaro Miura',
+        'publisher': 'Dark Horse Comics,U.S.',
+        'isbn': '9781506712000',
+        'category': 'Manga',
+        'language': 'English',
+        'price': 499.99,
+        'countInStock': 2,
+        'rating': 5,
+        'numReviews': 256,
+    },
+  {
+    '_id': '8',
+    'name': 'No Longer Human',
+    'image': '/images/No Longer Human.jpg',
+    'description':
+        'Plagued by a maddening anxiety ? the terrible disconnect between his own concept of happiness and the joy of the rest of the world ? Yozo Oba plays the clown in his dissolute life, holding up a mask for those around him as he spirals ever downward, locked arm-in-arm with death. 30,000 first printing.\n' +
+        '\n' +
+        'No Longer Human Hardback edition by Junji Ito',
+    'author': 'Junji Ito',
+    'publisher': 'Dark Horse Comics,U.S.',
+    'isbn': '9781974707096',
+    'category': 'Manga',
+    'language': 'English',
+    'price': 299.99,
+    'countInStock': 13,
+    'rating': 3.2,
+    'numReviews': 58,
+  },
 ]
 
 

@@ -24,9 +24,10 @@ function ProductScreen(props) {
     const [key, setKey] = useState('description');
 
     return (
-        <div>
-            <Container>
-                <Breadcrumb>
+        <div className="componentWraper">
+            <div className={'py-2'}></div>
+            <Container >
+                <Breadcrumb >
                     <LinkContainer to='/'>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                     </LinkContainer>
@@ -75,17 +76,17 @@ function ProductScreen(props) {
                     >
                         <Tab eventKey="description" title="Description &amp; Details">
 
-                            <Container>
-                                <Row>
+                            <Container className={'mb-3'}>
+                                <Row >
                                     <Col md={9}>
                                         <h3>Product Description</h3>
                                         <strong>
                                             {product.description}
                                         </strong>
                                     </Col>
-                                    <Col md={3}  >
+                                    <Col md={'auto'}  >
                                         <h3>Details </h3>
-                                        <ListGroup  variant="flush" >
+                                        <ListGroup variant="flush" >
                                             <ListGroup.Item variant="info">
                                                 <h6 >Author:  {product.author}</h6>
                                                 <h6 >Publisher:  {product.publisher}</h6>
