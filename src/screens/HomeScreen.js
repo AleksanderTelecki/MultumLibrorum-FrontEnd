@@ -54,13 +54,13 @@ function HomeScreen(props) {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Row>
-                {products.map(product => (
-                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                        <Product product={product}/>
-                    </Col>
-                ))}
-            </Row>
+                <Row>
+                    {products.map(product => (
+                        <Col key={product._id} sm={12} md={6} lg={4} xl={3} >
+                            <Product product={product}/>
+                        </Col>
+                    ))}
+                </Row>
                 <Offcanvas show={show} onHide={handleClose}>
                     <Offcanvas.Body>
                         <h1>Filters</h1>

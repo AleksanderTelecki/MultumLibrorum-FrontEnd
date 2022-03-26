@@ -27,7 +27,7 @@ const products = [
     'category': 'Biography',
 	'language': 'English',
     'price': 59.99,
-    'countInStock': 27,
+    'countInStock': 0,
     'rating': 4.3,
     'numReviews': 12,
   },
