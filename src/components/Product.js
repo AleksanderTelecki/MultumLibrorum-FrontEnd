@@ -12,7 +12,7 @@ function Product({product}) {
     return (
         <Container className="my-2 p-2">
             <Row>
-                <Link to={`/product/${product._id}`}>
+                <Link to={`/book/${product._id}`}>
                     <div style={center}>
                         <Image className={'cardImage'}  src={product.image}/>
                     </div>
@@ -29,7 +29,7 @@ function Product({product}) {
             </Row>
 
             <Row>
-                <Link to={`/product/${product._id}`}>
+                <Link to={`/book/${product._id}`}>
                     <div style={center}>
                         <strong>{product.name}</strong>
                     </div>

@@ -1,12 +1,30 @@
-import React, {useState} from 'react';
-import products from "../products";
+import React, {useState,useEffect} from 'react';
 import Product from "../components/Product";
 import {Row,Col,Navbar,Nav,Container,NavDropdown,Button,Form,FormControl,Offcanvas,ListGroup,Collapse,ButtonGroup,InputGroup} from 'react-bootstrap'
+import axios from 'axios'
+
 
 function HomeScreen(props) {
+
+
+    const [books,setBooks] = useState([])
+
+    useEffect(()=>{
+        async function fetchBooks(){
+            const {data} = await axios.get('/api/books/');
+            setBooks(data)
+
+        }
+
+        fetchBooks()
+
+    },[])
+    // FILTER MENU
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    // FILTER MENU FILTERS
     const [openCategory, setOpenCategory] = useState(false);
     const [openPrice, setOpenPrice] = useState(false);
     const [openPublisher, setOpenPublisher] = useState(false);
@@ -56,9 +74,9 @@ function HomeScreen(props) {
                 </Container>
             </Navbar>
                 <Row xs={1} sm={2} md={3} lg={4} xl={5}>
-                    {products.map(product => (
-                        <Col key={product._id} >
-                            <Product product={product}/>
+                    {books.map(book => (
+                        <Col key={book._id} >
+                            <Product product={book}/>
                         </Col>
                     ))}
                 </Row>

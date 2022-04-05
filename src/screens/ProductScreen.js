@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link,useParams } from 'react-router-dom'
 import {
     Row,
@@ -16,11 +16,27 @@ import {
 } from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import Rating from "../components/Rating";
-import products from "../products";
+import axios from "axios";
+
 
 function ProductScreen(props) {
     let { id } = useParams();
-    const product = products.find(x => x._id===id);
+    const [book,setBook] = useState([])
+
+    useEffect(()=>{
+        async function fetchBooks(){
+            const {data} = await axios.get(`/api/books/${id}`);
+            setBook(data)
+
+        }
+
+        fetchBooks()
+
+    },[])
+
+
+
+
     const [key, setKey] = useState('description');
 
     return (
@@ -32,35 +48,35 @@ function ProductScreen(props) {
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                     </LinkContainer>
                     <Breadcrumb.Item active>
-                        {product.name}
+                        {book.name}
                     </Breadcrumb.Item>
                 </Breadcrumb>
             <Row>
 
                 <Col md="auto" >
 
-                    <Image className="productImage" src={product.image} alt={product.name} fluid  />
+                    <Image className="productImage" src={book.image} alt={book.name} fluid  />
                 </Col>
 
                 <Col md={3}>
                     <ListGroup >
                         <ListGroup.Item>
-                            <h3>{product.name}</h3>
+                            <h3>{book.name}</h3>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'}/>
+                            <Rating value={book.rating} text={`${book.numReviews} reviews`} color={'#f8e825'}/>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                            Price: ${product.price}
+                            Price: ${book.price}
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                                    Status: {product.countInStock > 0 ? 'In Stock': 'Out of Stock' }
+                                    Status: {book.countInStock > 0 ? 'In Stock': 'Out of Stock' }
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button className="w-100 h-100" disabled={product.countInStock === 0} type='button'>Add to Cart</Button>
+                            <Button className="w-100 h-100" disabled={book.countInStock === 0} type='button'>Add to Cart</Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
@@ -81,16 +97,16 @@ function ProductScreen(props) {
                                     <Col md={9}>
                                         <h3>Product Description</h3>
                                         <strong>
-                                            {product.description}
+                                            {book.description}
                                         </strong>
                                     </Col>
                                     <Col md={'auto'}  >
                                         <h3>Details </h3>
                                         <ListGroup variant="flush" >
                                             <ListGroup.Item variant="info">
-                                                <h6 >Author:  {product.author}</h6>
-                                                <h6 >Publisher:  {product.publisher}</h6>
-                                                <h6 >ISBN:  {product.isbn}</h6>
+                                                <h6 >Author:  {book.author}</h6>
+                                                <h6 >Publisher:  {book.publisher}</h6>
+                                                <h6 >ISBN:  {book.isbn}</h6>
                                             </ListGroup.Item>
                                         </ListGroup>
 

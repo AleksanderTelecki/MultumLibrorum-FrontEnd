@@ -13,7 +13,7 @@ function App() {
               <Container>
                   <Routes>
                   <Route path='/' element={<HomeScreen/>} exact />
-                  <Route path='/product/:id' element={<ProductScreen/>} />
+                  <Route path='/book/:id' element={<ProductScreen/>} />
                   </Routes>
               </Container>
           </main>
@@ -23,3 +23,5 @@ function App() {
 }
 
 export default App;
+
+
