@@ -9,6 +9,7 @@ function Product({product}) {
             alignItems: 'center',
             justifyContent: 'center',
     }
+    console.log(product)
     return (
         <Container className="my-2 p-2">
             <Row>
@@ -31,7 +32,7 @@ function Product({product}) {
             <Row>
                 <Link to={`/book/${product._id}`}>
                     <div style={center}>
-                        <strong>{product.name}</strong>
+                        <strong>{product.title}</strong>
                     </div>
                 </Link>
             </Row>
