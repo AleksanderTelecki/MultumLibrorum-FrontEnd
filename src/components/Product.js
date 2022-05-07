@@ -9,7 +9,7 @@ function Product({product}) {
             alignItems: 'center',
             justifyContent: 'center',
     }
-    console.log(product)
+
     return (
         <Container className="my-2 p-2">
             <Row>

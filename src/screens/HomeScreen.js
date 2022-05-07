@@ -7,18 +7,25 @@ import axios from 'axios'
 function HomeScreen(props) {
 
 
-    const [books,setBooks] = useState([])
+    const [books,setBooks] = useState([]);
 
-    useEffect(()=>{
-        async function fetchBooks(){
-            const {data} = await axios.get('/api/books/');
-            setBooks(data)
-
+    const fetchBooks = async () => {
+        try {
+            const res = await axios
+                .get('/api/books/')
+                .then((result) => result.data.results);
+            setBooks(res)
+        } catch (err) {
+            console.log(err);
         }
+    };
 
-        fetchBooks()
+    useEffect(() => {
+        fetchBooks();
+    }, []);
 
-    },[])
+
+
     // FILTER MENU
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);

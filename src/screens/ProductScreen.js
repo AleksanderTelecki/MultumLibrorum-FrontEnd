@@ -48,20 +48,19 @@ function ProductScreen(props) {
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
                     </LinkContainer>
                     <Breadcrumb.Item active>
-                        {book.name}
+                        {book.title}
                     </Breadcrumb.Item>
                 </Breadcrumb>
             <Row>
 
                 <Col md="auto" >
-
-                    <Image className="productImage" src={book.image} alt={book.name} fluid  />
+                    <Image className="productImage" src={book.image} alt={book.title} fluid  />
                 </Col>
 
                 <Col md={3}>
                     <ListGroup >
                         <ListGroup.Item>
-                            <h3>{book.name}</h3>
+                            <h3>{book.title}</h3>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
