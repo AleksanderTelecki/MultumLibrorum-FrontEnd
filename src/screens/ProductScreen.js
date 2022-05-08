@@ -72,10 +72,10 @@ function ProductScreen(props) {
                         </ListGroup.Item>
 
                         <ListGroup.Item>
-                                    Status: {book.countInStock > 0 ? 'In Stock': 'Out of Stock' }
+                                    Status: {book.availableQuantity > 0 ? 'In Stock': 'Out of Stock' }
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button className="w-100 h-100" disabled={book.countInStock === 0} type='button'>Add to Cart</Button>
+                            <Button className="w-100 h-100" disabled={book.availableQuantity === 0} type='button'>Add to Cart</Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
@@ -105,7 +105,7 @@ function ProductScreen(props) {
                                             <ListGroup.Item variant="info">
                                                 <h6 >Author:  {book.author}</h6>
                                                 <h6 >Publisher:  {book.publisher}</h6>
-                                                <h6 >ISBN:  {book.isbn}</h6>
+                                                <h6 >ISBN:  {book.isbn13}</h6>
                                             </ListGroup.Item>
                                         </ListGroup>
 

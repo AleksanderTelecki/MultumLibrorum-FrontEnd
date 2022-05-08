@@ -3,6 +3,7 @@ import {Button, Card, Col, Container, Image, Row} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import Rating from "./Rating";
 
+
 function Product({product}) {
     const center = {
         display: 'flex',
