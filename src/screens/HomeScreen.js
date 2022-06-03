@@ -1,30 +1,20 @@
 import React, {useState,useEffect} from 'react';
 import Product from "../components/Product";
 import {Row,Col,Navbar,Nav,Container,NavDropdown,Button,Form,FormControl,Offcanvas,ListGroup,Collapse,ButtonGroup,InputGroup} from 'react-bootstrap'
-import axios from 'axios'
-
+import {useDispatch,useSelector} from 'react-redux'
+import {listProducts} from '../actions/productActions'
+import Spinner from "../components/Spinner";
+import Message from "../components/Message";
 
 function HomeScreen(props) {
-
-
-    const [books,setBooks] = useState([]);
-
-    const fetchBooks = async () => {
-        try {
-            const res = await axios
-                .get('/api/books/')
-                .then((result) => result.data.results);
-            setBooks(res)
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const dispatch = useDispatch()
+    const productList = useSelector(state => state.productList)
+    const {error,loading,products} = productList
 
     useEffect(() => {
-        fetchBooks();
-    }, []);
+        dispatch((listProducts()))
 
-
+    }, [dispatch]);
 
     // FILTER MENU
     const [show, setShow] = useState(false);
@@ -80,13 +70,16 @@ function HomeScreen(props) {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-                <Row xs={1} sm={2} md={3} lg={4} xl={5}>
-                    {books.map(book => (
-                        <Col key={book._id} >
-                            <Product product={book}/>
-                        </Col>
-                    ))}
-                </Row>
+                {loading ? <Spinner/>
+                    : error ? <Message color='red' title='Error!'>{error}</Message>
+                        :<Row xs={1} sm={2} md={3} lg={4} xl={5}>
+                            {products.map(book => (
+                                <Col key={book._id} >
+                                    <Product product={book}/>
+                                </Col>
+                            ))}
+                        </Row>}
+
                 <Offcanvas show={show} onHide={handleClose}>
                     <Offcanvas.Body>
                         <h1>Filters</h1>
