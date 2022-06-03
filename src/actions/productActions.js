@@ -6,7 +6,8 @@ import {
 
     PRODUCT_DETAILS_REQUEST,
     PRODUCTS_DETAILS_SUCCESS,
-    PRODUCTS_DETAILS_FAIL
+    PRODUCTS_DETAILS_FAIL,
+    PRODUCTS_DETAILS_CLEAR
 } from "../constants/productConstants";
 
 
@@ -51,4 +52,10 @@ export const listProductDetails = (id)=> async(dispatch)=>{
         })
 
     }
+}
+
+export const clearProductDetailsData = ()=>async(dispatch)=>{
+    dispatch({
+        type:PRODUCTS_DETAILS_CLEAR
+    })
 }
