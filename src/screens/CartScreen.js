@@ -6,12 +6,11 @@ import {CartTable} from "../components/CartTable";
 
 
 function CartScreen(props) {
-    const {id} = useParams()
-    const navigate = useNavigate();
+    const {id} = useParams();
     const [searchParams] = useSearchParams();
     const cart = useSelector(state => state.cart)
 
-    const qty = searchParams.get('qty')
+    const qty = parseInt(searchParams.get('qty'))
     const {cartItems} = cart
 
 
