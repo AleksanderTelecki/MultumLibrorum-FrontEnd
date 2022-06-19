@@ -4,10 +4,11 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
-import {LoginScreen} from "./screens/LoginScreen";
+import LoginScreen from "./screens/LoginScreen";
 import {RegisterScreen} from "./screens/RegisterScreen";
 import {ForgotPasswordScreen} from "./screens/ForgotPasswordScreen";
 import CartScreen from "./screens/CartScreen";
+import {ProfileScreen} from "./screens/ProfileScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                   <Route path='/registration' element={<RegisterScreen/>} />
                   <Route path='/forgot-password' element={<ForgotPasswordScreen/>} />
                   <Route path='/cart' element={<CartScreen />} />
+                  <Route path='/profile' element={<ProfileScreen />} />
                   <Route path='/cart/:id' element={<CartScreen />} />
                   </Routes>
               </Container>
