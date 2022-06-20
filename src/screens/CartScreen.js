@@ -22,7 +22,6 @@ function CartScreen(props) {
     },[dispatch,id,qty])
 
 
-    console.log(cartItems)
     return (
         <div>
             <CartTable data={cartItems}/>

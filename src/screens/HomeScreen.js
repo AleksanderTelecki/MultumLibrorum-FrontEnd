@@ -2,30 +2,47 @@ import React, {useState,useEffect} from 'react';
 import Product from "../components/Product";
 import {Row,Col,Navbar,Nav,Container,NavDropdown,Button,Form,FormControl,Offcanvas,ListGroup,Collapse,ButtonGroup,InputGroup} from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
-import {listProducts} from '../actions/productActions'
+import {listGenres, listProducts} from '../actions/productActions'
 import Spinner from "../components/Spinner";
 import Message from "../components/Message";
+import {Drawer, MultiSelect, Paper, SimpleGrid} from "@mantine/core";
+import axios from "axios";
 
 function HomeScreen(props) {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
+    const genresList = useSelector(state=>state.genresList)
+    const {genres} = genresList
     const {error,loading,products} = productList
+
 
     useEffect(() => {
         dispatch((listProducts()))
+        dispatch(listGenres())
 
     }, [dispatch]);
 
-    // FILTER MENU
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [opened, setOpened] = useState(false);
+    const [value, setValue] = useState([]);
+    const [search,setSearch] = useState()
 
-    // FILTER MENU FILTERS
-    const [openCategory, setOpenCategory] = useState(false);
-    const [openPrice, setOpenPrice] = useState(false);
-    const [openPublisher, setOpenPublisher] = useState(false);
-    const [openLanguage, setOpenLanguage] = useState(false);
+     async function handleFilter(e) {
+         e.preventDefault()
+         const genres = value
+         dispatch((listProducts({genres:genres})))
+         setOpened(false)
+     }
+
+    function clearFilter() {
+        setValue([])
+        dispatch((listProducts()))
+        setOpened(false)
+    }
+
+    function handleSearch() {
+        setSearch('')
+        dispatch((listProducts({search:search})))
+    }
 
     return (
         <div className="componentWraper" >
@@ -40,7 +57,7 @@ function HomeScreen(props) {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="#action1" onClick={handleShow}>Filter</Nav.Link>
+                            <Nav.Link onClick={() => setOpened(true)} href="#action1">Filter</Nav.Link>
                             <NavDropdown title="Browse Store" id="navbarScrollingDropdown">
                                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
@@ -52,12 +69,12 @@ function HomeScreen(props) {
                         </Nav>
                         <Form className="d-flex">
                             <InputGroup className="me-2">
-                                <FormControl
+                                <FormControl value={search} onChange={(e) => setSearch(e.target.value)}
                                     placeholder="Search"
                                     aria-label="Search"
                                     aria-describedby="search"
                                 />
-                                <Button variant="secondary" id="search">
+                                <Button onClick={handleSearch} variant="secondary" id="search">
                                     <i className="fa-solid fa-magnifying-glass"></i>
                                 </Button>
                             </InputGroup>
@@ -79,91 +96,31 @@ function HomeScreen(props) {
                                 </Col>
                             ))}
                         </Row>}
+                <Drawer
+                    opened={opened}
+                    onClose={() => setOpened(false)}
+                    title="Filter Menu"
+                    padding="md"
+                    size="md"
+                    position="right"
+                >
+                    <Paper>
+                    <MultiSelect
+                        data={genres}
+                        value={value}
+                        onChange={setValue}
+                        label="Choose genres"
+                        placeholder="Pick all that you like"
+                        searchable
+                        nothingFound="Nothing found"
+                    />
+                        <SimpleGrid cols={2}>
+                            <Button className="mt-2" onClick={handleFilter} variant="secondary">Use filter</Button>
+                            <Button className="mt-2" onClick={clearFilter} variant="danger">Clear Filter</Button>
+                        </SimpleGrid>
 
-                <Offcanvas show={show} onHide={handleClose}>
-                    <Offcanvas.Body>
-                        <h1>Filters</h1>
-                        <Form>
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <ListGroup className="my-2" variant="flush">
-                                <ListGroup.Item>
-                                    <Button
-                                    onClick={() => setOpenCategory(!openCategory)}
-                                    aria-controls="example-collapse-text"
-                                    aria-expanded={openCategory}
-                                    variant="link">
-                                    Category
-                                    </Button>
-                                    <Collapse in={openCategory}>
-                                        <div id="example-collapse-text">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                                            labore wes anderson cred nesciunt sapiente ea proident.
-                                        </div>
-                                    </Collapse>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button
-                                        onClick={() => setOpenPrice(!openPrice)}
-                                        aria-controls="example-collapse-text"
-                                        aria-expanded={openPrice}
-                                        variant="link">
-                                        Price
-                                    </Button>
-                                    <Collapse in={openPrice}>
-                                        <div id="example-collapse-text">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                                            labore wes anderson cred nesciunt sapiente ea proident.
-                                        </div>
-                                    </Collapse>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button
-                                        onClick={() => setOpenPublisher(!openPublisher)}
-                                        aria-controls="example-collapse-text"
-                                        aria-expanded={openPublisher}
-                                        variant="link">
-                                        Publisher
-                                    </Button>
-                                    <Collapse in={openPublisher}>
-                                        <div id="example-collapse-text">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                                            labore wes anderson cred nesciunt sapiente ea proident.
-                                        </div>
-                                    </Collapse>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button
-                                        onClick={() => setOpenLanguage(!openLanguage)}
-                                        aria-controls="example-collapse-text"
-                                        aria-expanded={openLanguage}
-                                        variant="link">
-                                        Language
-                                    </Button>
-                                    <Collapse in={openLanguage}>
-                                        <div id="example-collapse-text">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                                            labore wes anderson cred nesciunt sapiente ea proident.
-                                        </div>
-                                    </Collapse>
-                                </ListGroup.Item>
-                            </ListGroup>
-                            <Container>
-                                <Button className="mx-2" variant="primary">Set Filters</Button>
-                                <Button variant="warning">Clear Filters</Button>
-                            </Container>
-
-                        </Form>
-                    </Offcanvas.Body>
-                </Offcanvas>
+                    </Paper>
+                </Drawer>
             </Container>
         </div>
     );

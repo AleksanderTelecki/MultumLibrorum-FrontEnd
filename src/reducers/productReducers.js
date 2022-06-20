@@ -6,7 +6,7 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCTS_DETAILS_SUCCESS,
     PRODUCTS_DETAILS_FAIL,
-    PRODUCTS_DETAILS_CLEAR
+    PRODUCTS_DETAILS_CLEAR, PRODUCT_GENRES_REQUEST, PRODUCTS_GENRES_SUCCESS, PRODUCTS_GENRES_FAIL
 } from "../constants/productConstants";
 
 
@@ -18,6 +18,20 @@ export const productListReducer = (state={products:[]},action)=>{
             return {loading:false,products:action.payload}
         case PRODUCTS_LIST_FAIL:
             return {loading:false,error:action.payload}
+
+        default:
+            return state
+    }
+}
+
+export const genresListReducer = (state={genres:[]},action)=>{
+    switch (action.type){
+        case PRODUCT_GENRES_REQUEST:
+            return {loading:true,genres:[]}
+        case PRODUCTS_GENRES_SUCCESS:
+            return {loading:false,genres:action.payload}
+        case PRODUCTS_GENRES_FAIL:
+            return {loading:false,genres:action.payload}
 
         default:
             return state
